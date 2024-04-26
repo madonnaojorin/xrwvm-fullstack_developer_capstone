@@ -4,9 +4,10 @@ from django.db import models
 from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-
 # Create your models here.
+# Create Carmake model
 class CarMake(models.Model):
+
     name = models.CharField(max_length=100)
     description = models.TextField()
     # Other fields as needed
@@ -14,8 +15,9 @@ class CarMake(models.Model):
     def __str__(self):
         return self.name  # Return the name as the string representation
 
-
+#Create CarModel
 class CarModel(models.Model):
+
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
     name = models.CharField(max_length=100)
     CAR_TYPES = [
@@ -23,17 +25,17 @@ class CarModel(models.Model):
         ('SUV', 'SUV'),
         ('WAGON', 'Wagon'),
         ('COUPE', 'Coupe'),
-        ('CONVERTIBLE','Convertible'),
-        ('PICKUP','Pickup'),
-        ('JEEP','Jeep'),
-        ('HATCHBACK','Hatchback'),
+        ('CONVERTIBLE', 'Convertible'),
+        ('PICKUP', 'Pickup'),
+        ('JEEP', 'Jeep'),
+        ('HATCHBACK', 'Hatchback'),
     ]
     type = models.CharField(max_length=11, choices=CAR_TYPES, default='SUV')
     year = models.IntegerField(default=2024,
-        validators=[
-            MaxValueValidator(2024),
-            MinValueValidator(2015)
-        ])
+            validators=[
+                MaxValueValidator(2024),
+                MinValueValidator(2015)
+            ])
     color = models.CharField(max_length=50)
 
     def __str__(self):
